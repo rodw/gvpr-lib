@@ -1,0 +1,7 @@
+N {
+  if(attr_starts_with($,"x","bar")) {
+    printf("NODE \"%s\" MATCHES.\n",$.name);
+  } else {
+    printf("NODE \"%s\" DOES NOT MATCH.\n",$.name);
+  }
+}

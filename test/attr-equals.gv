@@ -1,0 +1,8 @@
+graph test_attr_equals {
+  A [x="bar"]
+  B [x=bar]
+  Z [x="foobar"]
+  Y [x="ba"]
+  X [x=" bar"]
+  W [x="BAR"]
+}

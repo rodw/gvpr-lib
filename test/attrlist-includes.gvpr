@@ -1,0 +1,17 @@
+N {
+  if(attrlist_includes($,"x","bar")) {
+    printf("NODE \"%s\" MATCHES.\n",$.name);
+  } else {
+    printf("NODE \"%s\" DOES NOT MATCH.\n",$.name);
+  }
+}
+// N {
+//   if(attr_starts_with($,"y","bar")) {
+//     color = "green";
+//   }
+// }
+
+// N {
+//   if(attr_contains($,"w","bar")) {
+//     color = "orange";
+//   }

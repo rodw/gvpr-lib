@@ -1,0 +1,9 @@
+graph test_attrlist_includes {
+  A [x="foo,bar"]
+  B [x="foo bar"]
+  C [x="bar"]
+  D [x=bar]
+  E [x="foo,bar,xyzzy"]
+  Z [x="foobar"]
+  Y [x="barfoo"]
+}

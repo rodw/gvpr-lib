@@ -1,0 +1,9 @@
+graph test_attr_ends_with {
+  A [x="bar"]
+  B [x="foobar"]
+  C [x=" bar"]
+  D [x=bar]
+  Z [x="bar "]
+  Y [x="barfoo"]
+  X [x="bar bar ba"]
+}

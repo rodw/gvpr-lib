@@ -1,0 +1,10 @@
+graph test_attr_contains {
+  A [x="bar"]
+  B [x="foobar"]
+  C [x=" bar"]
+  D [x=bar]
+  E [x="foobarfoo"]
+  Z [x="ba r "]
+  Y [x="bAR"]
+  X [x=" b a r "]
+}
