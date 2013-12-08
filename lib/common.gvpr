@@ -1,18 +1,28 @@
+/*
+ * A library of utility functions for gvpr.
+ * Copyright (c) 2013 Rodney Waldhoff <r.waldhoff@gmail.com>
+ */
 BEGIN {
 
-// USE `tail -n +4` TO CAT THIS FILE STARTING JUST AFTER THIS LINE.
-// (begin common.gvpr)
-
-  // Default delimiters used when tokeninzing a attribute as a list of values.
+  /**
+   * Default delimiters used when tokeninzing an attribute as
+   * a list of values.
+   */
   string ATTRLIST_DELIM = " \t\n,";
 
-  // Returns `1` iff the object `obj` contains an attribute named `attrname`, `0` otherwise.
-  // (Identical to the built-in `hasAttr` function.  Included for consistency.)
+  /**
+   *  Returns `1` iff the object `obj` contains an attribute named
+   * `attrname`, `0` otherwise. (Identical to the built-in `hasAttr`
+   * function.  Included for consistency.)
+   */
   int has_attr(obj_t obj,string attrname) {
     return hasAttr(obj,attrname);
   }
 
-  // Returns `1` iff the string `lookingin` starts with the substring specified in `lookingfor`, `0` otherwise.
+  /**
+   * Returns `1` iff the string `lookingin` starts with the
+   * substring specified in `lookingfor`, `0` otherwise.
+   */
   int str_starts_with(string lookingin,string lookingfor) {
     if(index(lookingin,lookingfor) == 0) {
       return 1;
@@ -21,7 +31,10 @@ BEGIN {
     }
   }
 
-  // Returns `1` iff the string `lookingin` ends with the substring specified in `lookingfor`, `0` otherwise.
+  /**
+   * Returns `1` iff the string `lookingin` ends with the substring
+   * specified in `lookingfor`, `0` otherwise.
+   */
   int str_ends_with(string lookingin,string lookingfor) {
     if(rindex(lookingin,lookingfor) == (length(lookingin) - length(lookingfor))) {
       return 1;
@@ -30,7 +43,10 @@ BEGIN {
     }
   }
 
-  // Returns `1` iff the string `lookingin` contains the substring specified in `lookingfor`, `0` otherwise.
+  /**
+   * Returns `1` iff the string `lookingin` contains the substring
+   * specified in `lookingfor`, `0` otherwise.
+   */
   int str_contains(string lookingin,string lookingfor) {
     if(index(lookingin,lookingfor) >= 0) {
       return 1;
@@ -39,8 +55,11 @@ BEGIN {
     }
   }
 
-  // Returns `1` iff the string `lookingin` is equal to the string specified in `lookingfor`, `0` otherwise.
-  // (Also see the built-in `strcmp` function. This method is included for consistency.)
+  /**
+   * Returns `1` iff the string `lookingin` is equal to the string
+   * specified in `lookingfor`, `0` otherwise. (Also see the built-in
+   * `strcmp` function. This method is included for consistency.)
+   */
   int str_equals(string lookingin,string lookingfor) {
     if(strcmp(lookingin,lookingfor) == 0) {
       return 1;
@@ -49,33 +68,48 @@ BEGIN {
     }
   }
 
-  // Returns `1` iff the object `obj` has an attribute named `attrname`
-  // whose value *starts* with the specified `value` substring.
+  /**
+   * Returns `1` iff the object `obj` has an attribute named
+   * `attrname` whose value *starts* with the specified
+   * `value` substring, `0` otherwise.
+   */
   int attr_starts_with(obj_t obj, string attrname, string value) {
     return str_starts_with(aget(obj,attrname),value);
   }
 
-  // Returns `1` iff the object `obj` has an attribute named `attrname`
-  // whose value *ends* with the specified `value` substring.
+  /**
+   * Returns `1` iff the object `obj` has an attribute named
+   * `attrname`  whose value *ends* with the specified
+   * `value` substring, `0` otherwise.
+   */
   int attr_ends_with(obj_t obj, string attrname, string value) {
     return str_ends_with(aget(obj,attrname),value);
   }
 
-  // Returns `1` iff the object `obj` has an attribute named `attrname`
-  // whose value *contains* the specified `value` substring.
+  /**
+   * Returns `1` iff the object `obj` has an attribute named
+   * `attrname`  whose value *contains* the specified
+   * `value` substring, `0` otherwise.
+   */
   int attr_contains(obj_t obj, string attrname, string value) {
     return str_contains(aget(obj,attrname),value);
   }
 
-  // Returns `1` iff the object `obj` has an attribute named `attrname`
-  // whose value *equals* the specified `value` string.
+  /**
+   * Returns `1` iff the object `obj` has an attribute named
+   * `attrname`  whose value *equals* the specified
+   * `value` string, `0` otherwise.
+   */
   int attr_equals(obj_t obj, string attrname, string value) {
     return str_equals(aget(obj,attrname),value);
   }
 
-  // Returns `1` iff the object `obj` has an attribute named `attrname`
-  // whose value (when parsed as a whitespace or comma delimited list
-  // elements) contains an element that is equal to the given `value`
+  /**
+   * Returns `1` iff the object `obj` has an attribute named
+   * `attrname` whose value (when parsed as a whitespace or
+   * comma delimited list of elements) contains an element
+   * that is equal to the given `value`, `0` otherwise.
+   */
   int attrlist_includes(obj_t obj, string attrname, string value) {
     string t[int]; int i,c;
     c = tokens(aget(obj,attrname),t,ATTRLIST_DELIM);
@@ -86,8 +120,5 @@ BEGIN {
     }
     return 0;
   }
-
-// (end common.gvpr)
-// USE `head -n -3` TO CAT THIS FILE STOPPING JUST BEFORE THIS LINE.
 
 }
