@@ -2,7 +2,7 @@
 
 This repository contains resources that augment or extend **`gvpr`**, **Graphviz's graph pattern recognizer**.
 
-`gvpr` is an `awk`-like language for modifying or processing graphs (expressed in the ([DOT language](http://www.graphviz.org/doc/info/lang.html) syntax).
+`gvpr` is an `awk`-like language for modifying or processing graphs (expressed in the [DOT language](http://www.graphviz.org/doc/info/lang.html)).
 
 `gvpr` was written by Emden Gansner and is part of [Graphviz](http://graphviz.org/), an open source graph visualization and manipulation library created at AT&T Labs Research.
 
@@ -25,7 +25,7 @@ which will apply the given transformation to the graph defined in the file `mygr
 
 Currently this library contains two primary artifacts:
 
-1. A simple emacs mode for editing `gvpr` scripts (found in `extra/gvpr-mode.el`).
+1. A simple emacs mode for editing `gvpr` scripts. See [`extra/gvpr-mode.el`](https://github.com/rodw/gvpr-lib/blob/master/extra/gvpr-mode.el) for details.
 
 2. A small library of utility functions for use with `gvpr` (found in the `lib` directory).
 
