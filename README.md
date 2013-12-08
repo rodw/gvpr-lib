@@ -12,16 +12,12 @@ This repository contains resources that augment or extend **`gvpr`**, **Graphviz
 
 For example, the `gvpr` script:
 
-```.gvpr
-N [color=="red"] { shape = "oval" }
-```
+    N [color=="red"] { shape = "oval" }
 
 will change the shape of every red node to `oval`.  To use this script, we can issue a command like:
 
 
-```.bash .console .sh
-gvpr -c "N [color==\"red\"] { shape = \"oval\" }" mygraph.gv
-```
+    gvpr -c "N [color==\"red\"] { shape = \"oval\" }" mygraph.gv
 
 which will apply the given transformation to the graph defined in the file `mygraph.gv` (and print the resulting graph to stdout).  For more, you can download [a PDF rendition of the `gvpr` man page](http://www.graphviz.org/pdf/gvpr.1.pdf) or check the documentation that was bundled with your Graphviz repository.
 
