@@ -3,7 +3,11 @@
 ;; Copyright (C) 2013 Rod Waldhoff
 ;;
 ;; Author: Rod Waldhoff <r.waldhoff@gmail.com>
-;; Keywords: graphviz gv dot gvpr graph
+;; Maintainer: Rod Waldhoff <r.waldhoff@gmail.com>
+;; Created: 7 Dec 2013
+;; Version: 0.1.0
+;; Keywords: graphviz, gv, dot, gvpr, graph
+;; URL: https://raw.github.com/rodw/gvpr-lib/master/extra/gvpr-mode.el
 
 ;; This file is NOT part of GNU Emacs.
 ;;
@@ -23,7 +27,6 @@
 ;; Boston, MA 02111-1307, USA. or visit <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;;
 ;; `gvpr` is the "graph pattern recognizer", a graph processing and
 ;; transformation tool that is part of the Graphviz open-source graph
 ;; visualization suite (<http://www.graphviz.org/>).
