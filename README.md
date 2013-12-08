@@ -27,6 +27,8 @@ Currently this library contains two primary artifacts:
 
 1. A simple emacs mode for editing `gvpr` scripts. See [`extra/gvpr-mode.el`](https://github.com/rodw/gvpr-lib/blob/master/extra/gvpr-mode.el) for details.
 
+    This package is also [available on the Marmalade repository](http://marmalade-repo.org/packages/gvpr-mode/).  Run `M-x package-install gvpr-mode` to install it (once Marmalade has been set up [as described here](http://marmalade-repo.org/).)
+
 2. A small library of utility functions for use with `gvpr` (found in the `lib` directory).
 
 Currently there is little documentation of these outside of the source code itself, but the source should be fairly self-explanatory.
