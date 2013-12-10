@@ -1,15 +1,11 @@
 var path             = require('path');
 var fs               = require('fs');
-var os               = require('os');
+var util             = require('util');
 var HOMEDIR          = path.join(__dirname,'..');
 var IS_INSTRUMENTED  = fs.existsSync(path.join(HOMEDIR,'lib-cov'));
 var LIB_DIR          = (IS_INSTRUMENTED) ? path.join(HOMEDIR,'lib-cov') : path.join(HOMEDIR,'lib');
 var parser           = require(path.join(LIB_DIR,'parser'));
 var common_gvpr_file = path.join(LIB_DIR,'common.gvpr');
-
-function trim(str) {
-  return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-}
 
 function escape(str) {
   if(typeof str != 'string') {
@@ -158,31 +154,31 @@ function to_gvpr(stylesheets,begins,others) {
 }
 
 function parse(str) {
-  return parser.parse(trim(str));
+  return parser.parse(str.trim());
 }
 
-function main() {
+function main(argv) {
   var stylesheets = [];
   var before_scripts = [];
   var scripts = [];
   var gvpr_args = [];
   var output = null;
 
-  for(var i=2;i<process.argv.length;) {
-    if(process.argv[i] == "-S") {
-      stylesheets.push(process.argv[i+1]);
+  for(var i=2;i<argv.length;) {
+    if(argv[i] == "-S") {
+      stylesheets.push(argv[i+1]);
       i += 2;
-    } else if(process.argv[i] == "-B") {
-      before_scripts.push(process.argv[i+1]);
+    } else if(argv[i] == "-B") {
+      before_scripts.push(argv[i+1]);
       i += 2;
-    } else if(process.argv[i] == "-G") {
-      scripts.push(process.argv[i+1]);
+    } else if(argv[i] == "-G") {
+      scripts.push(argv[i+1]);
       i += 2;
-    } else if(process.argv[i] == "-O") {
-      output = process.argv[i+1];
+    } else if(argv[i] == "-O") {
+      output = argv[i+1];
       i += 2;
     } else {
-      gvpr_args.push(process.argv[i]);
+      gvpr_args.push(argv[i]);
       i += 1;
     }
   }
@@ -198,30 +194,30 @@ function main() {
       fs.writeFileSync(output,gvpr);
     }
   } else {
-    var sys = require('sys')
-    var exec = require('child_process').exec;
+    var child_process = require('child_process');
     var temp = require('temp');
-    // temp.track();
+    var os   = require('os');
+    temp.track();
     temp.open({dir:os.tmpDir(),prefix:"gvprss",suffix:".gvpr"},function(err,info){
       if(err) { throw err; }
       fs.write(info.fd,gvpr);
       fs.close(info.fd,function(err){
         if(err) { throw err; }
-          var command = "gvpr ";
-          command += " -f " + info.path + " ";
-          gvpr_args.forEach(function(arg){
-            command += escape(arg) + " ";
-          });
-          function puts(error, stdout, stderr) { sys.puts(stdout); sys.puts(stderr); }
-          // console.log(command);
-          exec(command, puts);
+          var command = "gvpr";
+          var args = [];
+          args.push("-f");
+          args.push(info.path);
+          gvpr_args.forEach(function(arg){ args.push(arg); });
+          var child = child_process.spawn("gvpr", args,{stdio:'inherit',detached:true});
+          child.on('close',function(code){process.exit(code);});
+          child.on('error',function(err){console.log("ERROR",err);});
       });
     });
   }
 }
 
 if(require.main === module) {
-  main();
+  main(process.argv);
 } else {
   exports = (exports ? exports : this);
   exports.main = main;
