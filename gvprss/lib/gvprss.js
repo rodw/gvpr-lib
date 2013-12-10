@@ -164,6 +164,9 @@ function main(argv) {
   var gvpr_args = [];
   var output = null;
 
+  if(argv.length == 2) {
+    stylesheets.push("-");
+  }
   for(var i=2;i<argv.length;) {
     if(argv[i] == "-S") {
       stylesheets.push(argv[i+1]);
@@ -182,11 +185,16 @@ function main(argv) {
       i += 1;
     }
   }
+
+
   stylesheets = files_to_strings(stylesheets);
   before_scripts = files_to_strings(before_scripts);
   scripts = files_to_strings(scripts);
   var gvpr = to_gvpr(stylesheets,before_scripts,scripts);
 
+  if(gvpr_args.length == 0 && output == null) {
+    output = "-";
+  }
   if(output) {
     if(output == "-") {
       console.log(gvpr);
