@@ -1,0 +1,24 @@
+{
+  "name": "tk",
+  "description": "tk",
+  "version": "0.0.1",
+  "private": "true",
+  "main": "./lib/app.js",
+   "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "optimist": "latest"
+  },
+  "devDependencies": {
+    "pegjs":  "latest",
+    "coffee-script":  "latest",
+    "docco": "latest",
+    "jscoverage": "latest", "expresso": "latest",
+    "mocha": "latest",
+    "should": "latest"
+  },
+  "engines": {
+    "node": ">= 0.10.3"
+  }
+}
