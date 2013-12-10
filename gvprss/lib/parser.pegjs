@@ -103,7 +103,7 @@ edge_selector  "E" = "E" { return "edge"  }
 graph_selector "G" = "G" { return "graph" }
 
 id_selector "id selector"
-  = hash id:identifier { return {left:"name",operator:"==",right:id } }
+  = hash id:identifier { return {left:"name",operator:"nonattr-equals",right:id } }
 
 class_selector "class selector"
   = dot name:identifier { return {left:"class",operator:"~=",right:name } }

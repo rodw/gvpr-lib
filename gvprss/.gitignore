@@ -4,6 +4,7 @@ lib-cov
 node_modules
 module
 lib/parser.js
+lib/common.gvpr
 
 # GENERAL
 #---------------------------------------------------------------------

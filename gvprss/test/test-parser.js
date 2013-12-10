@@ -41,7 +41,7 @@ describe('parser',function(){
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("foo");
     parsed[0].action.should.equal("{}");
     done();
@@ -149,7 +149,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("theid");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -173,7 +173,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("theid");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -197,7 +197,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("theid");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -221,7 +221,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("theid");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -245,7 +245,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("the id");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -269,7 +269,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("the id");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -293,7 +293,7 @@ describe('parser',function(){
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("the id");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -317,7 +317,7 @@ describe('parser',function(){
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(5);
     parsed[0].conditions[0].left.should.equal("name");
-    parsed[0].conditions[0].operator.should.equal("==");
+    parsed[0].conditions[0].operator.should.equal("nonattr-equals");
     parsed[0].conditions[0].right.should.equal("the id");
     parsed[0].conditions[1].left.should.equal("class");
     parsed[0].conditions[1].operator.should.equal("~=");
@@ -348,7 +348,7 @@ describe('parser',function(){
     parsed[0].conditions[1].operator.should.equal("==");
     parsed[0].conditions[1].right.should.equal("attr value");
     parsed[0].conditions[2].left.should.equal("name");
-    parsed[0].conditions[2].operator.should.equal("==");
+    parsed[0].conditions[2].operator.should.equal("nonattr-equals");
     parsed[0].conditions[2].right.should.equal("the id");
     parsed[0].conditions[3].left.should.equal("anotherattr");
     parsed[0].conditions[3].operator.should.equal("~=");
@@ -396,7 +396,6 @@ describe('parser',function(){
     done();
   });
 
-
   it("can parse multiple statements",function(done){
     var parsed = parser.parse("N {}\nG#foo { penwidth = 5; }\n[x=\"y\"] { y = $.x }\n")
     parsed.length.should.equal(3)
@@ -406,7 +405,7 @@ describe('parser',function(){
     parsed[1].type.should.equal("graph");
     parsed[1].conditions.length.should.equal(1);
     parsed[1].conditions[0].left.should.equal("name");
-    parsed[1].conditions[0].operator.should.equal("==");
+    parsed[1].conditions[0].operator.should.equal("nonattr-equals");
     parsed[1].conditions[0].right.should.equal("foo");
     parsed[1].action.should.equal("{ penwidth = 5; }");
     should.not.exist(parsed[2].type);

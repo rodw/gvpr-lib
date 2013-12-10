@@ -8,7 +8,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "optimist": "latest"
+    "temp": "latest"
   },
   "devDependencies": {
     "pegjs":  "latest",
