@@ -155,4 +155,4 @@ action_body_text
 //////////////////////////////////////////////////////////////////////
 
 selector_action
-  = s:selector_list a:action { s.action = a; return s }
+  = s:selector_list a:action whitespace* { s.action = a; return s }

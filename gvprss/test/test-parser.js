@@ -4,12 +4,12 @@ var fs              = require('fs');
 var HOMEDIR         = path.join(__dirname,'..');
 var IS_INSTRUMENTED = fs.existsSync(path.join(HOMEDIR,'lib-cov'));
 var LIB_DIR         = (IS_INSTRUMENTED) ? path.join(HOMEDIR,'lib-cov') : path.join(HOMEDIR,'lib');
-var dotss           = require(path.join(LIB_DIR,'/dotss'));
+var parser           = require(path.join(LIB_DIR,'/parser'));
 
-describe('dotss parser',function(){
+describe('parser',function(){
 
   it("can parse a no-op node match",function(done){
-    var parsed = dotss.parse("N {}")
+    var parsed = parser.parse("N {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)
@@ -18,7 +18,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op edge match",function(done){
-    var parsed = dotss.parse("E {}")
+    var parsed = parser.parse("E {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("edge");
     should.not.exist(parsed[0].conditions)
@@ -27,7 +27,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op graph match",function(done){
-    var parsed = dotss.parse("G {}")
+    var parsed = parser.parse("G {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("graph");
     should.not.exist(parsed[0].conditions)
@@ -36,7 +36,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op ID (name) match",function(done){
-    var parsed = dotss.parse("#foo {}")
+    var parsed = parser.parse("#foo {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -48,7 +48,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op class match",function(done){
-    var parsed = dotss.parse(".bar {}")
+    var parsed = parser.parse(".bar {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -60,7 +60,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-exists match",function(done){
-    var parsed = dotss.parse("[foo] {}")
+    var parsed = parser.parse("[foo] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -72,7 +72,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-equals match (==)",function(done){
-    var parsed = dotss.parse("[foo==bar] {}")
+    var parsed = parser.parse("[foo==bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -84,7 +84,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-equals match (=)",function(done){
-    var parsed = dotss.parse("[foo=bar] {}")
+    var parsed = parser.parse("[foo=bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -96,7 +96,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-starts-with match (^=)",function(done){
-    var parsed = dotss.parse("[foo^=bar] {}")
+    var parsed = parser.parse("[foo^=bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -108,7 +108,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-ends-with match ($=)",function(done){
-    var parsed = dotss.parse("[foo$=bar] {}")
+    var parsed = parser.parse("[foo$=bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -120,7 +120,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-contains match (*=)",function(done){
-    var parsed = dotss.parse("[foo*=bar] {}")
+    var parsed = parser.parse("[foo*=bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -132,7 +132,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op attribute-list-includes match (~=)",function(done){
-    var parsed = dotss.parse("[foo~=bar] {}")
+    var parsed = parser.parse("[foo~=bar] {}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(1);
@@ -144,7 +144,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 1)",function(done){
-    var parsed = dotss.parse("N #theid .theclass .anotherclass [attrname==attrvalue] [anotherattr~=anothervalue] {}")
+    var parsed = parser.parse("N #theid .theclass .anotherclass [attrname==attrvalue] [anotherattr~=anothervalue] {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -168,7 +168,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 2: no spaces)",function(done){
-    var parsed = dotss.parse("N#theid.theclass.anotherclass[attrname==attrvalue][anotherattr~=anothervalue]{}")
+    var parsed = parser.parse("N#theid.theclass.anotherclass[attrname==attrvalue][anotherattr~=anothervalue]{}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -192,7 +192,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 3: quoted attribute values)",function(done){
-    var parsed = dotss.parse("N#theid.theclass.anotherclass[attrname==\"attrvalue\"][anotherattr~=\"anothervalue\"]{}")
+    var parsed = parser.parse("N#theid.theclass.anotherclass[attrname==\"attrvalue\"][anotherattr~=\"anothervalue\"]{}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -216,7 +216,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 4: numeric attribute values)",function(done){
-    var parsed = dotss.parse("N#theid.theclass.anotherclass[attrname==17][anotherattr~=9]{}")
+    var parsed = parser.parse("N#theid.theclass.anotherclass[attrname==17][anotherattr~=9]{}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -240,7 +240,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 5: quoted id)",function(done){
-    var parsed = dotss.parse("N #\"the id\" .theclass .anotherclass [attrname==attrvalue] [anotherattr~=anothervalue] {}")
+    var parsed = parser.parse("N #\"the id\" .theclass .anotherclass [attrname==attrvalue] [anotherattr~=anothervalue] {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -264,7 +264,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 6: quoted class names)",function(done){
-    var parsed = dotss.parse("N #\"the id\" .\"the class\" .\"another class\" [attrname==attrvalue] [anotherattr~=anothervalue] {}")
+    var parsed = parser.parse("N #\"the id\" .\"the class\" .\"another class\" [attrname==attrvalue] [anotherattr~=anothervalue] {}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -288,7 +288,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 7: quotes without whitespace)",function(done){
-    var parsed = dotss.parse("N#\"the id\".\"the class\".\"another class\"[attrname==\"attr value\"][anotherattr~=\"another value\"]{}")
+    var parsed = parser.parse("N#\"the id\".\"the class\".\"another class\"[attrname==\"attr value\"][anotherattr~=\"another value\"]{}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -312,7 +312,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a no-op multi-party match (case 8: no type selector)",function(done){
-    var parsed = dotss.parse("#\"the id\".\"the class\".\"another class\"[attrname==\"attr value\"][anotherattr~=\"another value\"]{}")
+    var parsed = parser.parse("#\"the id\".\"the class\".\"another class\"[attrname==\"attr value\"][anotherattr~=\"another value\"]{}")
     parsed.length.should.equal(1)
     should.not.exist(parsed[0].type)
     parsed[0].conditions.length.should.equal(5);
@@ -337,7 +337,7 @@ describe('dotss parser',function(){
 
 
   it("can parse a no-op multi-party match (case 9: order shuffled up a bit)",function(done){
-    var parsed = dotss.parse("N.\"the class\"[attrname==\"attr value\"]#\"the id\"[anotherattr~=\"another value\"].\"another class\"{}")
+    var parsed = parser.parse("N.\"the class\"[attrname==\"attr value\"]#\"the id\"[anotherattr~=\"another value\"].\"another class\"{}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     parsed[0].conditions.length.should.equal(5);
@@ -361,7 +361,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a node match with a simple action",function(done){
-    var parsed = dotss.parse("N { color=\"red\"; }")
+    var parsed = parser.parse("N { color=\"red\"; }")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)
@@ -370,7 +370,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a node match with a simple action that contains curly brackets",function(done){
-    var parsed = dotss.parse("N {\nif(1!=2) {\ncolor=\"red\";\n}\n}")
+    var parsed = parser.parse("N {\nif(1!=2) {\ncolor=\"red\";\n}\n}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)
@@ -379,7 +379,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a node match with a simple action that contains quoted brackets",function(done){
-    var parsed = dotss.parse("N {\nif(1!=2) {\nxlabel=\"{foo}\";\n}\n}")
+    var parsed = parser.parse("N {\nif(1!=2) {\nxlabel=\"{foo}\";\n}\n}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)
@@ -388,7 +388,7 @@ describe('dotss parser',function(){
   });
 
   it("can parse a node match with a simple action that contains mis-matched quoted brackets",function(done){
-    var parsed = dotss.parse("N {\n  if(1!=2) {\n    xlabel=\"}f}o}{o}?\";\n  }\n}")
+    var parsed = parser.parse("N {\n  if(1!=2) {\n    xlabel=\"}f}o}{o}?\";\n  }\n}")
     parsed.length.should.equal(1)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)
@@ -398,7 +398,7 @@ describe('dotss parser',function(){
 
 
   it("can parse multiple statements",function(done){
-    var parsed = dotss.parse("N {}\nG#foo { penwidth = 5; }\n[x=\"y\"] { y = $.x }\n")
+    var parsed = parser.parse("N {}\nG#foo { penwidth = 5; }\n[x=\"y\"] { y = $.x }\n")
     parsed.length.should.equal(3)
     parsed[0].type.should.equal("node");
     should.not.exist(parsed[0].conditions)

@@ -44,7 +44,7 @@ pegjs: $(PEGJS_JS)
 clean-pegjs:; rm -rf $(PEGJS_JS)
 
 ### MOCHA ######################################################################
-test: $(PEGJS_JS) $(MOCHA_TESTS) $(NODE_MODULES)
+test: $(NODE_MODULES) $(PEGJS_JS) $(MOCHA_TESTS)
 	$(MOCHA_EXE) $(MOCHA_TEST_ARGS) $(MOCHA_TESTS)
 
 ################################################################################
