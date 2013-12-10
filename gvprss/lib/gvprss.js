@@ -203,14 +203,13 @@ function main(argv) {
       fs.write(info.fd,gvpr);
       fs.close(info.fd,function(err){
         if(err) { throw err; }
-          var command = "gvpxr";
           var args = [];
           args.push("-f");
           args.push(info.path);
           gvpr_args.forEach(function(arg){ args.push(arg); });
           var child = child_process.spawn("gvpr", args,{stdio:'inherit',detached:true});
           child.on('close',function(code){process.exit(code);});
-          child.on('error',function(err){console.log("ERROR",err);});
+          child.on('error',function(err){console.error(err);});
       });
     });
   }
