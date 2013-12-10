@@ -203,7 +203,7 @@ function main(argv) {
       fs.write(info.fd,gvpr);
       fs.close(info.fd,function(err){
         if(err) { throw err; }
-          var command = "gvpr";
+          var command = "gvpxr";
           var args = [];
           args.push("-f");
           args.push(info.path);
