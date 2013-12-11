@@ -45,10 +45,10 @@ MARKDOWN_SUFFIX ?= "</body></html>"
 # TARGETS ######################################################################
 ################################################################################
 .SUFFIXES:;
-.PHONY: all clean really-clean npm install clean-node-modules really-clean-node-modules pegjs clean-pegjs test clean-gvpr-common  clean-test-module-install clean-module module test-module-install coverage clean-coverage docco markdown clean-docco clean-markdown docs clean-docs;
+.PHONY: all clean really-clean npm install clean-node-modules really-clean-node-modules pegjs clean-pegjs test clean-gvpr-common  clean-test-module-install clean-module module test-module-install coverage clean-coverage docco markdown clean-docco clean-markdown docs clean-docs publish;
 
 ### ALL ########################################################################
-all: $(NODE_MODULES) pegjs;
+all: test;
 clean: clean-pegjs clean-node-modules clean-test-module-install clean-module clean-coverage clean-docs;
 really-clean: clean reall-clean-node-modules;
 
@@ -78,6 +78,7 @@ clean-node-modules:; $(NPM_EXE) prune
 really-clean-node-modules:; rm -rf $(NODE_MODULES)
 clean-test-module-install:; rm -rf ${TEST_MODULE_DIR}
 clean-module:; rm -rf ${MODULE_DIR}
+publish: module test-module-install; $(NPM_EXE) publish $(MODULE_DIR)
 
 ### PEGJS ######################################################################
 %.js: %.pegjs; $(PEGJS_EXE) $<
