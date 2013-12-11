@@ -7,10 +7,12 @@
   "author":       "Rod Waldhoff <the-letter-r-followed-by-my-last-name@gmail.com> http://heyrod.com/",
   "contributors": [ ],
   "repository":   { "type":"git", "url":"https://github.com/rodw/gvprss.git" },
+  "homepage":     "https://github.com/rodw/gvpr-lib/tree/master/gvprss",
   "bugs":         { "url":"http://github.com/rodw/gvprss/issues" },
   "main":         "lib/gvprss.js",
   "bin":          { "gvprss": "./bin/gvprss" },
   "scripts":      { "test": "make test" },
+  "directories":  { "lib":"lib", "bin":"bin", "doc":"docs" },
   "dependencies": {
     "temp":       ">= 0.6"
   },
