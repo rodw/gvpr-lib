@@ -4,7 +4,7 @@
 
 ## Installing
 
-`gvprss` is implemented in Node.js (server-side JavaScript).  Instructions for install Node.js can be found at [nodejs.org/](http://nodejs.org/).
+`gvprss` is implemented in Node.js (server-side JavaScript).  Instructions for installing Node.js can be found at [nodejs.org/](http://nodejs.org).
 
 Once Node.js is installed, `gvprss` can be installed using `npm`, the Node Package Manager that is bundled with Node.js.
 
