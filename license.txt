@@ -2,7 +2,7 @@
 NOTE: Unless otherwise noted, this software and the associated
 documention is licensed under the "MIT License", as described below.
 (Also see <http://opensource.org/licenses/mit-license.php> for more
-information about the MIT License.
+information about the MIT License.)
 ----------------------------------------------------------------------
 
 Copyright (c) 2013 Rodney Waldhoff
