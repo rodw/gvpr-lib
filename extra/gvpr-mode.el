@@ -51,6 +51,7 @@
 
 (require 'generic-x)
 
+;;;###autoload
 (define-generic-mode
   'gvpr-mode                      ;; name of the mode
   '("//")                         ;; comments
