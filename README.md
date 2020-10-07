@@ -33,7 +33,7 @@ which will apply the given transformation to the graph defined in the file `mygr
 
 Well, gvpr-mode is just a quick-and-dirty syntax coloring mode I threw together because I was working on a number of `gvpr` scripts and wanted to make it easier on myself.
 
-The gvprss and the common set of gvpr functions are an outcome of and related to a book I've been writing called [The Graphviz Cookbook](http://noumlaut.com/graphviz-cookbook).  If you're working with `gvpr` or Graphviz, please check that out (and tell your friends :) ).
+The gvprss and the common set of gvpr functions are an outcome of and related to a book I've been writing called [The Graphviz Cookbook](http://heyrod.com/projects/gv-cookbook.html).  If you're working with `gvpr` or Graphviz, please check that out (and tell your friends :) ).
 
 ## A note on licensing.
 
