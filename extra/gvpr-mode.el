@@ -62,7 +62,7 @@
   '(                              ;; other syntax-colored terms
     ;; clauses
     ("\\<BEGIN\\>"   . 'font-lock-preprocessor-face)
-    ("\\<BEGIN_G\\>" . 'font-lock-preprocessor-face)
+    ("\\<BEG\\(?:IN\\)?_G\\>" . 'font-lock-preprocessor-face)
     ("\\<N\\>"       . 'font-lock-preprocessor-face)
     ("\\<E\\>"       . 'font-lock-preprocessor-face)
     ("\\<END_G\\>"   . 'font-lock-preprocessor-face)
