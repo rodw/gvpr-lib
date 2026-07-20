@@ -8,7 +8,7 @@ This repository contains resources that augment or extend **`gvpr`**, **Graphviz
 
 ## What's `gvpr` again?
 
-`gvpr` can process one or more DOT files, applying user-specified *actions* for every element for that meets the conditions of the corresponding (and also user-specified) *predicates*.
+`gvpr` can process one or more DOT files, applying user-specified *actions* for every element that meets the conditions of the corresponding (and also user-specified) *predicates*.
 
 For example, the `gvpr` script:
 
